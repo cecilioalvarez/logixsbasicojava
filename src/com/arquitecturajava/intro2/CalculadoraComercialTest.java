@@ -1,6 +1,6 @@
 package com.arquitecturajava.intro2;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import org.junit.jupiter.api.BeforeEach;
