@@ -1,16 +1,16 @@
 import java.util.Date;
 
-public class Factura {
+public class Compra {
 
-    private int numero;
+    private String id;
     private String concepto;
     private double importe;
     private Date fecha;
-    public int getNumero() {
-        return numero;
+    public String getId() {
+        return id;
     }
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setId(String id) {
+        this.id = id;
     }
     public String getConcepto() {
         return concepto;
@@ -30,20 +30,12 @@ public class Factura {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Factura(int numero, String concepto, double importe, Date fecha) {
-        this.numero = numero;
+    public Compra(String id, String concepto, double importe, Date fecha) {
+        this.id = id;
         this.concepto = concepto;
         this.importe = importe;
         this.fecha = fecha;
     }
-    public double getImporteConIVA() {
-        return importe*1.21;
-    }
-    public double getImporteRetenido() {
-        return  importe *0.15;
-    }
+
     
-
-
-
 }
