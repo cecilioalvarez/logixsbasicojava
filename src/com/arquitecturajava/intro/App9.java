@@ -1,3 +1,4 @@
+package com.arquitecturajava.intro;
 public class App9 {
     public static void main(String[] args) throws Exception {
        
