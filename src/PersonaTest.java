@@ -7,9 +7,7 @@ public class PersonaTest {
     @Test
     public void estaJubiladoTest() {
 
-        Persona persona1= new Persona();
-        persona1.edad=75;
-
+        Persona persona1= new Persona("pepe","gomez",75);
         assertTrue (persona1.estaJubilado());
     }
     
