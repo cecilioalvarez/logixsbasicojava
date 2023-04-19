@@ -36,8 +36,13 @@ public class Factura {
         this.importe = importe;
         this.fecha = fecha;
     }
+    //refactoring del codigo 
+    // en algo que esta en produccion
+    // y no sabemos si el cambio le afectara
+    
     public double getImporteConIVA() {
-        return importe*1.21;
+        CalculoFinanzas calculo= new CalculoFinanzas();
+        return calculo.iva(importe);
     }
     public double getImporteRetenido() {
         return  importe *0.15;
