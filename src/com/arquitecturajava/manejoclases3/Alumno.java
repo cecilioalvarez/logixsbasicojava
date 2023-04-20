@@ -32,5 +32,17 @@ public class Alumno {
         this.notas = notas;
     }
 
+    public Nota getMejorNota() {
+
+        Nota mayor= new  Nota(0);
+
+        for (Nota nota: notas) {
+
+                if (mayor.getValor()<nota.getValor()) {
+                    mayor=nota;
+                }
+        }
+        return mayor;
+    }
     
 }
