@@ -18,6 +18,20 @@ public class AlumnoTest {
 
             assertEquals(1,numeroNotas);
     }
+
+    @Test
+    public void añadirGrupoNotasTest() {
+
+            Alumno alumno= new Alumno("pedro");
+            ArrayList<Nota> lista=crearNotas(5,2,7,9,1);
+            //sobrecargado
+            alumno.addNota(lista);
+            int numeroNotas= alumno.getNotas().size();
+
+            assertEquals(5,numeroNotas);
+    }
+
+
     @Test
     public void mejorNotaTest() {
 
