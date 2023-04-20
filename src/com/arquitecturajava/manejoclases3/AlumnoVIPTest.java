@@ -8,11 +8,11 @@ public class AlumnoVIPTest {
     @Test
     void porcentajeBecaTest() {
 
-        AlumnoVIP alumno= new AlumnoVIP("pedro","normal");
+        AlumnoVIP alumno= new AlumnoVIP("pedro","Normal");
 
         double porcentajeBeca= alumno.getPorcentajeBeca();
 
-        assertEquals(30, porcentajeBeca,0);
+        assertEquals(20, porcentajeBeca,0);
 
 
     }
