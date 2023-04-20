@@ -44,5 +44,17 @@ public class Alumno {
         }
         return mayor;
     }
+    public Nota getNotaMedia() {
+
+        double total=0;
+
+        for (Nota nota: notas) {
+
+              total=total+nota.getValor();
+        }
+
+        double media=total/notas.size();
+        return new Nota(media);
+    }
     
 }

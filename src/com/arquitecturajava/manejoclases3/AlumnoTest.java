@@ -42,4 +42,25 @@ public class AlumnoTest {
             assertEquals(9,notaMayor.getValor());
 
     }
+
+    @Test
+    public void notaMediaTest() {
+
+            //arrange
+            Alumno alumno= new Alumno("pedro");
+            ArrayList<Nota> lista= new ArrayList<Nota>();
+            lista.add(new Nota (5));
+            lista.add(new Nota (2));
+            lista.add(new Nota (7));
+            lista.add(new Nota (9));
+            lista.add(new Nota (8));
+            alumno.setNotas(lista);
+
+            //act 
+            Nota notaMedia=alumno.getNotaMedia();
+
+            //assert 
+            assertEquals(6.2,notaMedia.getValor());
+
+    }
 }
