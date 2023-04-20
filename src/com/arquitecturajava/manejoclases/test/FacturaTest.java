@@ -1,10 +1,12 @@
-package com.arquitecturajava.manejoclases;
+package com.arquitecturajava.manejoclases.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
+
+import com.arquitecturajava.manejoclases.Factura;
 
 public class FacturaTest {
     

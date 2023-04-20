@@ -1,7 +1,9 @@
-package com.arquitecturajava.manejoclases;
+package com.arquitecturajava.manejoclases.test;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
+
+import com.arquitecturajava.manejoclases.Compra;
 
 public class CompraTest {
     
