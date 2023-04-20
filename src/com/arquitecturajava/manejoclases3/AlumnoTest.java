@@ -11,13 +11,11 @@ public class AlumnoTest {
     @Test
     public void añadirNotaTest() {
 
-            //arrange
             Alumno alumno= new Alumno("pedro");
-            //act
+      
             alumno.addNota(new Nota (5));
             int numeroNotas= alumno.getNotas().size();
 
-            //assert 
             assertEquals(1,numeroNotas);
 
     }
@@ -25,20 +23,13 @@ public class AlumnoTest {
     @Test
     public void mejorNotaTest() {
 
-            //arrange
+       
             Alumno alumno= new Alumno("pedro");
-            ArrayList<Nota> lista= new ArrayList<Nota>();
-            lista.add(new Nota (5));
-            lista.add(new Nota (2));
-            lista.add(new Nota (7));
-            lista.add(new Nota (9));
-            lista.add(new Nota (8));
+            ArrayList<Nota> lista=crearNotas(5,2,7,9,1);
             alumno.setNotas(lista);
 
-            //act 
             Nota notaMayor=alumno.getMejorNota();
 
-            //assert 
             assertEquals(9,notaMayor.getValor());
 
     }
@@ -48,19 +39,22 @@ public class AlumnoTest {
 
             //arrange
             Alumno alumno= new Alumno("pedro");
-            ArrayList<Nota> lista= new ArrayList<Nota>();
-            lista.add(new Nota (5));
-            lista.add(new Nota (2));
-            lista.add(new Nota (7));
-            lista.add(new Nota (9));
-            lista.add(new Nota (8));
+            ArrayList<Nota> lista= crearNotas(7,2,6,8,8);
             alumno.setNotas(lista);
 
-            //act 
             Nota notaMedia=alumno.getNotaMedia();
 
-            //assert 
             assertEquals(6.2,notaMedia.getValor());
 
+    }
+    // parametro con argumento variable
+    private ArrayList<Nota> crearNotas(double ... valores) {
+
+        ArrayList<Nota> lista= new ArrayList<Nota>();
+        for (double valor : valores) {
+            lista.add(new Nota (valor));
+        }
+        return lista;
+        
     }
 }
