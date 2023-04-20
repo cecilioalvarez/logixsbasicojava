@@ -9,16 +9,20 @@ public class Nota {
     }
 
     public void setValor(double valor) {
+        if (valor < 0 || valor > 10)
+            throw new IllegalArgumentException("valor no valido");
+
         this.valor = valor;
     }
 
     public Nota(double valor) {
-        this.valor = valor;
+
+        setValor(valor);
     }
 
     public boolean estaAprobada() {
 
-        return valor>=5;
+        return valor >= 5;
     }
 
     public boolean estaSuspensa() {
@@ -27,6 +31,6 @@ public class Nota {
 
     public boolean esSobreSaliente() {
 
-        return valor>=9;
+        return valor >= 9 && valor <= 10;
     }
 }
