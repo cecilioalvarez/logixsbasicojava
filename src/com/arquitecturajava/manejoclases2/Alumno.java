@@ -1,3 +1,5 @@
+package com.arquitecturajava.manejoclases2;
+
 public class Alumno {
 
     private Nota nota1;
