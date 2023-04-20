@@ -60,7 +60,7 @@ public class NotaTest {
         Nota nota5= new Nota (5);
         String aprobada= nota5.getCalificacion();
         assertEquals("Aprobado",aprobada);
-
+        
     }
 
 
