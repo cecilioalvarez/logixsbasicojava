@@ -1,3 +1,4 @@
+package com.arquitecturajava.manejoclases;
 import java.util.Date;
 
 public class Compra {

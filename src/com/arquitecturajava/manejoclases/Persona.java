@@ -1,3 +1,4 @@
+package com.arquitecturajava.manejoclases;
 public class Persona {
     
     private String nombre;

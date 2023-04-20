@@ -1,4 +1,7 @@
+package com.arquitecturajava.manejoclases;
 import java.util.Date;
+
+import com.arquitecturajava.utils.CalculoFinanzas;
 
 public class Factura {
 
@@ -39,7 +42,7 @@ public class Factura {
     //refactoring del codigo 
     // en algo que esta en produccion
     // y no sabemos si el cambio le afectara
-    
+
     public double getImporteConIVA() {
         CalculoFinanzas calculo= new CalculoFinanzas();
         return calculo.iva(importe);

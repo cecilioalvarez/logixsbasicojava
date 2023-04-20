@@ -1,3 +1,4 @@
+package com.arquitecturajava.manejoclases;
 public class Principal {
    
     public static void main(String[] args) {
