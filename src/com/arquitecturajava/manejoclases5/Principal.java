@@ -4,10 +4,12 @@ public class Principal {
     public static void main(String[] args) {
         
         Persona persona= new Persona("ana");
-        Deportista deportista= new Deportista("pedro");
-        
+        //polimorfismo dinamico
+        Persona persona2= new Deportista("pedro");
+    
+
         persona.andar();
-        deportista.andar();
+        persona2.andar();
 
 
     }
