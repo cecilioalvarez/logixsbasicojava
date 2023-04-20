@@ -32,11 +32,13 @@ public class FacturaTest {
     @Test
     public void calcularRetencionFactura() {
 
+        //arrange
         Factura factura= new Factura(1,"ordenador",200, new Date());
-        
-        double retencion= factura.getImporteRetenido();
+        //act
+        double retencionFacturaImporte= factura.getImporteRetenido();
 
-        assertEquals(30, retencion, 0.1);
+        // assert verificar
+        assertEquals(30, retencionFacturaImporte, 0.1);
     }
    
 }

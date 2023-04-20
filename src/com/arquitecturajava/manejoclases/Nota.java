@@ -33,4 +33,18 @@ public class Nota {
 
         return valor >= 9 && valor <= 10;
     }
+
+    public String getCalificacion() {
+
+        if (valor>=0 && valor<5) {
+
+            return "Suspenso";
+        }else if (valor >=5 && valor<7) {
+
+            return "Aprobado";
+        }else if (valor>=7 && valor<9) {
+
+            return "Notable";
+        }else return "SobreSaliente";
+    }
 }
