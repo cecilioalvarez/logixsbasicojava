@@ -23,8 +23,12 @@ public class Rectangulo {
     //instancia
     public double area() {
 
+       return Rectangulo.area(lado1, lado2);
+    }
+    //clase
+    public static double area( double lado1, double lado2) {
+        // implementada aqui
         return lado1*lado2;
     }
-    
     
 }
