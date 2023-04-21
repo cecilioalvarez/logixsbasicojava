@@ -7,6 +7,14 @@ public class BMW  extends Coche{
         //TODO Auto-generated constructor stub
     }
 
+    
+    /*@Override
+    public void repostar() {
+     System.out.println("el repostaje es vip");
+        super.repostar();
+    }*/
+
+
     @Override
     public void acelerar() {
       

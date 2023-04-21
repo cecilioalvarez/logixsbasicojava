@@ -6,7 +6,6 @@ public class Principal {
         
         BMW mibmw= new BMW("s3",40000);
         Coche c= new BMW ("s3",400000);
-        c.arrancar();
-        mibmw.acelerar();
+       mibmw.repostar();
     }
 }

@@ -11,6 +11,7 @@ public abstract class Coche {
         this.precio = precio;
     }
 
+
     public String getModelo() {
         return modelo;
     }
@@ -25,6 +26,12 @@ public abstract class Coche {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+    
+    public void repostar() {
+
+        System.out.println("el coche echa gasolina");
+
     }
 
     public abstract void arrancar();
