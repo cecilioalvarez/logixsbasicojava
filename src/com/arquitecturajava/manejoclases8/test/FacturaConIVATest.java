@@ -1,8 +1,10 @@
-package com.arquitecturajava.manejoclases8;
+package com.arquitecturajava.manejoclases8.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
+import com.arquitecturajava.manejoclases8.FacturaConIVA;
 
 public class FacturaConIVATest {
 

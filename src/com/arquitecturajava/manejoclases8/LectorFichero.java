@@ -23,7 +23,7 @@ public class LectorFichero {
     public LectorFichero(String fichero) {
         this.fichero = fichero;
     }
-    
+    // es un lector generico
     public List<String> leerLineas() throws IOException {
 
         List<String> listaLineas= new ArrayList<String>();

@@ -1,0 +1,9 @@
+*****************************
+IVA ,1,ordenador,220
+SINIVA,2,tablet,300
+IVA ,3,televisor,220
+*****************************
+IVA ,1,ordenador,220
+SINIVA,2,tablet,300
+IVA ,3,televisor,220
+*****************************
