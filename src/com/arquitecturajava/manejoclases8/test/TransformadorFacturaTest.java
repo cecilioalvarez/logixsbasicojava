@@ -2,23 +2,27 @@ package com.arquitecturajava.manejoclases8.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.arquitecturajava.manejoclases8.Empresa;
 import com.arquitecturajava.manejoclases8.Factura;
-import com.arquitecturajava.manejoclases8.TransformadorFactura;
+import com.arquitecturajava.manejoclases8.LectorFichero;
+import com.arquitecturajava.manejoclases8.TransformadorFicheroFacturacion;
+import com.arquitecturajava.manejoclases8.TransformadorTipoFactura;
 
 public class TransformadorFacturaTest {
     
-    TransformadorFactura tf;
+    TransformadorTipoFactura tf;
 
     @BeforeEach
     public void iniciar() {
 
-        tf= new TransformadorFactura();
+        tf= new TransformadorTipoFactura("*");
     }
 
     @Test
@@ -72,6 +76,32 @@ public class TransformadorFacturaTest {
      
         assertEquals(4,facturas.size());
     }
+
+
+
+    // test de integracion que integra varias clases
+    @Test
+    public void lineasToListaFacturasConFiltradoPorEmpresaTest() throws IOException {
+       
+      
+
+        LectorFichero lector= new LectorFichero("facturastest3.txt");
+        TransformadorTipoFactura transformador= new TransformadorTipoFactura("*");
+
+        TransformadorFicheroFacturacion tff= new TransformadorFicheroFacturacion(lector, transformador);
+
+        List<Empresa> empresas=tff.transformar();      
+     
+        Empresa empresaA= empresas.get(0);
+        Empresa empresaB= empresas.get(1);
+        
+        assertEquals(3,empresas.size());
+        assertEquals(3,empresaA.getFacturas().size());
+        assertEquals(1,empresaB.getFacturas().size());
+        assertEquals("EmpresaA",empresaA.getNombre());
+        assertEquals("EmpresaB",empresaB.getNombre());
+    }
+
 
 
 
