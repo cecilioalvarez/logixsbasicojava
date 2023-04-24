@@ -9,5 +9,9 @@ public class Priincipal {
 
         c.on();
         c.off();
+        c= new Televisor();
+
+        c.on();
+        c.off();
     }
 }
