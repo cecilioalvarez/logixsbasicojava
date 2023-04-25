@@ -7,12 +7,12 @@ import java.sql.Statement;
 
 public class Principal4 {
     public static void main(String[] args) {
-        Ordenador o = new Ordenador(1, "modelo1", 500);
+        OrdenadorAR o = new OrdenadorAR(1, "modelo1", 500);
         insertarOrdenador(o);
 
     }
 
-    public static void insertarOrdenador(Ordenador ordenador) {
+    public static void insertarOrdenador(OrdenadorAR ordenador) {
 
         String consultaSQL= "insert into Ordenador (numero,modelo,precio) values ("+ordenador.getNumero()+",'"+ ordenador.getModelo()+"',"+ ordenador.getPrecio()+")";
         System.out.println(consultaSQL);

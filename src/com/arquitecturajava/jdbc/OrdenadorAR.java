@@ -10,6 +10,7 @@ public class OrdenadorAR {
     private String modelo;
     private double precio;
 
+
     public int getNumero() {
         return numero;
     }
@@ -34,10 +35,38 @@ public class OrdenadorAR {
         this.precio = precio;
     }
 
+    
+    public OrdenadorAR(int numero) {
+        this.numero = numero;
+    }
+
     public OrdenadorAR(int numero, String modelo, double precio) {
         this.numero = numero;
         this.modelo = modelo;
         this.precio = precio;
+    }
+    
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + numero;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        OrdenadorAR other = (OrdenadorAR) obj;
+        if (numero != other.numero)
+            return false;
+        return true;
     }
 
     // su propia persistencia
@@ -45,6 +74,21 @@ public class OrdenadorAR {
 
         String sql = "insert into Ordenador (numero,modelo,precio) values (" + getNumero() + ",'" + getModelo() + "',"
                 + getPrecio() + ")";
+
+        try (Connection conexion = DataBaseHelper.getConexion("mySQL");
+                Statement sentencia = conexion.createStatement();) {
+            sentencia.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.println("ha ocurrido un error");
+            System.out.println(e.getMessage());
+        }
+    }
+
+     // su propia persistencia
+     public void borrar() {
+
+        String sql = "delete from  Ordenador where numero=" +getNumero() ;
+             
 
         try (Connection conexion = DataBaseHelper.getConexion("mySQL");
                 Statement sentencia = conexion.createStatement();) {
