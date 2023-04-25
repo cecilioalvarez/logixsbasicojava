@@ -11,7 +11,7 @@ public class Principal {
     public static void main(String[] args) {
 
         // Open a connection
-        try (Connection conn =getConexion("h2");
+        try (Connection conn =getConexion("mySQL");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("select * from PERSONAS");) {
             while (rs.next()) {
