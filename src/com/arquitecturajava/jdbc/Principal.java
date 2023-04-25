@@ -11,7 +11,7 @@ public class Principal {
     public static void main(String[] args) {
 
         // Open a connection
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
+        try (Connection conn =getConexion("h2");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("select * from PERSONAS");) {
             while (rs.next()) {
@@ -24,6 +24,20 @@ public class Principal {
         }
 
        
+    }
+
+    private static Connection getConexion(String tipoBaseDatos) throws SQLException {
+
+        if (tipoBaseDatos.equals("mySQL")) {
+            return  DriverManager.getConnection("jdbc:mysql://localhost:3306/logixs", "root", "");
+
+        }else {
+
+           return  DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
+        }
+
+      
+
     }
 
 }
