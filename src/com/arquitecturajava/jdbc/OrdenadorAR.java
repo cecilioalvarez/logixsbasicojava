@@ -1,15 +1,17 @@
 package com.arquitecturajava.jdbc;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrdenadorAR {
 
     private int numero;
     private String modelo;
     private double precio;
-
 
     public int getNumero() {
         return numero;
@@ -35,7 +37,9 @@ public class OrdenadorAR {
         this.precio = precio;
     }
 
-    
+    public OrdenadorAR() {
+    }
+
     public OrdenadorAR(int numero) {
         this.numero = numero;
     }
@@ -45,7 +49,6 @@ public class OrdenadorAR {
         this.modelo = modelo;
         this.precio = precio;
     }
-    
 
     @Override
     public int hashCode() {
@@ -84,11 +87,10 @@ public class OrdenadorAR {
         }
     }
 
-     // su propia persistencia
-     public void borrar() {
+    // su propia persistencia
+    public void borrar() {
 
-        String sql = "delete from  Ordenador where numero=" +getNumero() ;
-             
+        String sql = "delete from  Ordenador where numero=" + getNumero();
 
         try (Connection conexion = DataBaseHelper.getConexion("mySQL");
                 Statement sentencia = conexion.createStatement();) {
@@ -99,4 +101,23 @@ public class OrdenadorAR {
         }
     }
 
+    public static List<OrdenadorAR> buscarTodos() {
+
+        List<OrdenadorAR> lista= new ArrayList<OrdenadorAR>();
+      
+        try (Connection conn = DataBaseHelper.getConexion("mySQL");
+                Statement stmt = conn.createStatement();
+                ResultSet rs= stmt.executeQuery("select * from Ordenador"))
+                 {
+                 
+                    while (rs.next()) {
+
+                        lista.add(new OrdenadorAR(rs.getInt("numero"),rs.getString("modelo"),rs.getDouble("precio")));
+                    }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }
