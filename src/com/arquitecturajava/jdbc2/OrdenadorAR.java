@@ -90,7 +90,7 @@ public class OrdenadorAR {
     }
 
     // su propia persistencia
-    public void insertar() {
+    public OrdenadorAR insertar() {
 
         String sql = "insert into Ordenador (numero,modelo,precio) values (" + getNumero() + ",'" + getModelo() + "',"
                 + getPrecio() + ")";
@@ -102,6 +102,7 @@ public class OrdenadorAR {
             System.out.println("ha ocurrido un error");
             System.out.println(e.getMessage());
         }
+        return this;
     }
 
     // su propia persistencia
@@ -125,6 +126,25 @@ public class OrdenadorAR {
         try (Connection conn = DataBaseHelper.getConexion("mySQL");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("select * from Ordenador")) {
+
+            while (rs.next()) {
+
+                lista.add(new OrdenadorAR(rs.getInt("numero"), rs.getString("modelo"), rs.getDouble("precio")));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public static List<OrdenadorAR> buscarOrdenadoresBaratos() {
+
+        List<OrdenadorAR> lista = new ArrayList<OrdenadorAR>();
+
+        try (Connection conn = DataBaseHelper.getConexion("mySQL");
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("select * from Ordenador where precio<200")) {
 
             while (rs.next()) {
 
