@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrdenadorRepositoryMySQL {
+public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     
-    public Ordenador actualizar(Ordenador ordenador) throws SQLException {
+    @Override
+    public Ordenador actualizar(Ordenador ordenador) {
 
         String sql = "update  Ordenador set modelo=?, precio=? where numero=?";
 
@@ -22,12 +23,13 @@ public class OrdenadorRepositoryMySQL {
             sentencia.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            throw e;
+            throw new RuntimeException(e);
         }
         return ordenador;
     }
 
     // su propia persistencia
+    @Override
     public Ordenador insertar(Ordenador ordenador) throws SQLException {
 
         String sql = "insert into Ordenador (numero,modelo,precio) values (?,?,?)";
@@ -41,12 +43,13 @@ public class OrdenadorRepositoryMySQL {
         } catch (SQLException e) {
    
             System.out.println(e.getMessage());
-            throw e;
+            throw new RuntimeException(e);
         }
         return ordenador;
     }
 
     // su propia persistencia
+    @Override
     public void borrar(Ordenador ordenador) {
 
         String sql = "delete from Ordenador where numero=?";
@@ -57,10 +60,11 @@ public class OrdenadorRepositoryMySQL {
             sentencia.executeUpdate();
         } catch (SQLException e) {
             System.out.println("ha ocurrido un error");
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
+    @Override
     public  List<Ordenador> buscarTodos() {
 
         List<Ordenador> lista = new ArrayList<Ordenador>();
@@ -75,11 +79,13 @@ public class OrdenadorRepositoryMySQL {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("ha ocurrido un error");
+            throw new RuntimeException(e);
         }
         return lista;
     }
 
+    @Override
     public  List<Ordenador> buscarOrdenadoresBaratos() {
 
         List<Ordenador> lista = new ArrayList<Ordenador>();
@@ -94,11 +100,13 @@ public class OrdenadorRepositoryMySQL {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("ha ocurrido un error");
+            throw new RuntimeException(e);
         }
         return lista;
     }
 
+    @Override
     public  Ordenador buscarUno(int numero) {
 
         Ordenador ordenador = null;
@@ -118,11 +126,13 @@ public class OrdenadorRepositoryMySQL {
         } catch (
 
         SQLException e) {
-            e.printStackTrace();
+            System.out.println("ha ocurrido un error");
+            throw new RuntimeException(e);
         }
         return ordenador;
     }
 
+    @Override
     public  List<Ordenador> buscarPorRangoPrecios(double precioInicial, double precioFinal) {
 
         List<Ordenador> lista = new ArrayList<Ordenador>();
@@ -139,7 +149,8 @@ public class OrdenadorRepositoryMySQL {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("ha ocurrido un error");
+            throw new RuntimeException(e);
         }
         return lista;
 

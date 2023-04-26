@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public class OrdenadorRepositoryTest {
 
-    private static OrdenadorRepositoryMySQL repositorio;
+    private static OrdenadorRepository repositorio;
 
     @BeforeAll
     public static void inicializarGlobal() {
