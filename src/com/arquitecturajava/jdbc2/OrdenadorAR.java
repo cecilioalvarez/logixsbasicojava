@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +72,7 @@ public class OrdenadorAR {
         return true;
     }
 
-    public OrdenadorAR actualizar() {
+    public OrdenadorAR actualizar() throws SQLException {
 
         String sql = "update  Ordenador set modelo=?, precio=? where numero=?";
 
@@ -85,8 +84,8 @@ public class OrdenadorAR {
             sentencia.setDouble(3, getPrecio());
             sentencia.executeUpdate(sql);
         } catch (SQLException e) {
-            System.out.println("ha ocurrido un error");
             System.out.println(e.getMessage());
+            throw e;
         }
         return this;
     }
