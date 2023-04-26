@@ -1,6 +1,7 @@
 package com.arquitecturajava.jdbc2;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -72,32 +73,35 @@ public class OrdenadorAR {
         return true;
     }
 
-    // su propia persistencia
-    public void actualizar() {
+    public OrdenadorAR actualizar() {
 
-        String sql = "update  Ordenador set modelo='" 
-        + getModelo()+ "' , precio=" +getPrecio()+ 
-        "where numero=" + getNumero() ;
-               
+        String sql = "update  Ordenador set modelo=?, precio=? where numero=?";
 
         try (Connection conexion = DataBaseHelper.getConexion("mySQL");
-                Statement sentencia = conexion.createStatement();) {
+                PreparedStatement sentencia = conexion.prepareStatement(sql);) {
+
+            sentencia.setInt(1, getNumero());
+            sentencia.setString(2, getModelo());
+            sentencia.setDouble(3, getPrecio());
             sentencia.executeUpdate(sql);
         } catch (SQLException e) {
             System.out.println("ha ocurrido un error");
             System.out.println(e.getMessage());
         }
+        return this;
     }
 
     // su propia persistencia
     public OrdenadorAR insertar() {
 
-        String sql = "insert into Ordenador (numero,modelo,precio) values (" + getNumero() + ",'" + getModelo() + "',"
-                + getPrecio() + ")";
+        String sql = "insert into Ordenador (numero,modelo,precio) values (?,?,?)";
 
         try (Connection conexion = DataBaseHelper.getConexion("mySQL");
-                Statement sentencia = conexion.createStatement();) {
-            sentencia.executeUpdate(sql);
+                PreparedStatement sentencia = conexion.prepareStatement(sql);) {
+            sentencia.setInt(1, getNumero());
+            sentencia.setString(2, getModelo());
+            sentencia.setDouble(3, getPrecio());
+            sentencia.executeUpdate();
         } catch (SQLException e) {
             System.out.println("ha ocurrido un error");
             System.out.println(e.getMessage());
@@ -108,11 +112,12 @@ public class OrdenadorAR {
     // su propia persistencia
     public void borrar() {
 
-        String sql = "delete from  Ordenador where numero=" + getNumero();
+        String sql = "delete from Ordenador where numero=?";
 
         try (Connection conexion = DataBaseHelper.getConexion("mySQL");
-                Statement sentencia = conexion.createStatement();) {
-            sentencia.executeUpdate(sql);
+                PreparedStatement sentencia = conexion.prepareStatement(sql);) {
+            sentencia.setInt(1, getNumero());
+            sentencia.executeUpdate();
         } catch (SQLException e) {
             System.out.println("ha ocurrido un error");
             System.out.println(e.getMessage());
@@ -124,8 +129,8 @@ public class OrdenadorAR {
         List<OrdenadorAR> lista = new ArrayList<OrdenadorAR>();
 
         try (Connection conn = DataBaseHelper.getConexion("mySQL");
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("select * from Ordenador")) {
+                PreparedStatement stmt = conn.prepareStatement("select * from Ordenador");
+                ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
 
@@ -143,8 +148,8 @@ public class OrdenadorAR {
         List<OrdenadorAR> lista = new ArrayList<OrdenadorAR>();
 
         try (Connection conn = DataBaseHelper.getConexion("mySQL");
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("select * from Ordenador where precio<200")) {
+                PreparedStatement stmt = conn.prepareStatement("select * from Ordenador where precio<200");
+                ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
 
@@ -162,12 +167,16 @@ public class OrdenadorAR {
         OrdenadorAR ordenador = null;
 
         try (Connection conn = DataBaseHelper.getConexion("mySQL");
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("select * from Ordenador where numero=" + numero)) {
+                PreparedStatement stmt = conn.prepareStatement("select * from Ordenador where numero=?");
 
-            rs.next();
+        ) {
+            stmt.setInt(1, numero);
+            try (ResultSet rs = stmt.executeQuery()) {
+                rs.next();
 
-            ordenador = new OrdenadorAR(rs.getInt("numero"), rs.getString("modelo"), rs.getDouble("precio"));
+                ordenador = new OrdenadorAR(rs.getInt("numero"), rs.getString("modelo"), rs.getDouble("precio"));
+
+            }
 
         } catch (
 
@@ -182,13 +191,14 @@ public class OrdenadorAR {
         List<OrdenadorAR> lista = new ArrayList<OrdenadorAR>();
 
         try (Connection conn = DataBaseHelper.getConexion("mySQL");
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(
-                        "select * from Ordenador where precio between " + precioInicial + " and " + precioFinal)) {
+                PreparedStatement stmt = conn
+                        .prepareStatement("select * from Ordenador where precio between ? and ?")) {
 
-            while (rs.next()) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
 
-                lista.add(new OrdenadorAR(rs.getInt("numero"), rs.getString("modelo"), rs.getDouble("precio")));
+                    lista.add(new OrdenadorAR(rs.getInt("numero"), rs.getString("modelo"), rs.getDouble("precio")));
+                }
             }
 
         } catch (SQLException e) {

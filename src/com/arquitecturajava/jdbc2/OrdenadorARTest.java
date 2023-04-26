@@ -79,4 +79,16 @@ public class OrdenadorARTest {
         assertEquals(ordenador,ordenadorInsertado);
     }
 
+    @Test
+    public void actualizarTest() {
+
+        OrdenadorAR ordenador = new OrdenadorAR(10, "tablet", 1000);
+        ordenador.setModelo("otro");
+        ordenador.setPrecio(100);
+        OrdenadorAR ordenadorActualizado= ordenador.actualizar();
+        
+        assertEquals(ordenador,ordenadorActualizado);
+    }
+
+
 }
