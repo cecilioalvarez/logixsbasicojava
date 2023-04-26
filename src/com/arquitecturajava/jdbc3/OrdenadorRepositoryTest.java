@@ -14,11 +14,12 @@ import org.junit.jupiter.api.Test;
 
 public class OrdenadorRepositoryTest {
 
+    // variable de tipo interface
     private static OrdenadorRepository repositorio;
 
     @BeforeAll
     public static void inicializarGlobal() {
-
+        //instancio un solo objeto para todos
         repositorio= new OrdenadorRepositoryMySQL();
     }
 
@@ -73,11 +74,11 @@ public class OrdenadorRepositoryTest {
         Ordenador ordenador = new Ordenador(1);
         repositorio.borrar(ordenador);
         Ordenador ordenadorBorrado = repositorio.buscarUno(1);
-       assertNull(ordenadorBorrado);;
+        assertNull(ordenadorBorrado);;
     }
 
     @Test
-    public void insertarTest() throws SQLException {
+    public void insertarTest()  {
 
         Ordenador ordenador = new Ordenador(10, "tablet", 1000);
         Ordenador ordenadorInsertado= repositorio.insertar(ordenador);
@@ -85,7 +86,7 @@ public class OrdenadorRepositoryTest {
     }
 
     @Test
-    public void actualizarTest() throws SQLException {
+    public void actualizarTest()  {
 
         Ordenador ordenador = new Ordenador(10, "tablet", 1000);
         ordenador.setModelo("otro");

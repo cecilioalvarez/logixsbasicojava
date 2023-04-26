@@ -30,7 +30,7 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
 
     // su propia persistencia
     @Override
-    public Ordenador insertar(Ordenador ordenador) throws SQLException {
+    public Ordenador insertar(Ordenador ordenador) {
 
         String sql = "insert into Ordenador (numero,modelo,precio) values (?,?,?)";
 
@@ -117,8 +117,7 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
         ) {
             stmt.setInt(1, numero);
             try (ResultSet rs = stmt.executeQuery()) {
-                rs.next();
-
+                if (rs.next()!=false)
                 ordenador = new Ordenador(rs.getInt("numero"), rs.getString("modelo"), rs.getDouble("precio"));
 
             }

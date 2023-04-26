@@ -5,10 +5,10 @@ import java.util.List;
 
 public interface OrdenadorRepository {
 
-    Ordenador actualizar(Ordenador ordenador) throws SQLException;
+    Ordenador actualizar(Ordenador ordenador); 
 
     // su propia persistencia
-    Ordenador insertar(Ordenador ordenador) throws SQLException;
+    Ordenador insertar(Ordenador ordenador); 
 
     // su propia persistencia
     void borrar(Ordenador ordenador);
