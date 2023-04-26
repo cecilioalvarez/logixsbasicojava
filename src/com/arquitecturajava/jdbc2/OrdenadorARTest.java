@@ -1,11 +1,11 @@
 package com.arquitecturajava.jdbc2;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -72,7 +72,7 @@ public class OrdenadorARTest {
     }
 
     @Test
-    public void insertarTest() {
+    public void insertarTest() throws SQLException {
 
         OrdenadorAR ordenador = new OrdenadorAR(10, "tablet", 1000);
         OrdenadorAR ordenadorInsertado= ordenador.insertar();
@@ -80,7 +80,7 @@ public class OrdenadorARTest {
     }
 
     @Test
-    public void actualizarTest() {
+    public void actualizarTest() throws SQLException {
 
         OrdenadorAR ordenador = new OrdenadorAR(10, "tablet", 1000);
         ordenador.setModelo("otro");

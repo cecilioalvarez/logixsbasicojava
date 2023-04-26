@@ -3,6 +3,7 @@ package com.arquitecturajava.jdbc2;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,9 +29,16 @@ public class Principal {
         
             @Override
             public void actionPerformed(ActionEvent e) {
-                OrdenadorAR o= new OrdenadorAR(100, "nuevo", 200);
-                o.insertar();
-                JOptionPane.showMessageDialog(null, "hemos insertado");
+                OrdenadorAR o= new OrdenadorAR(102, "nuevo", 200);
+                
+                try {
+                    o.insertar();
+                    JOptionPane.showMessageDialog(null, "hemos insertado");
+                } catch (SQLException e1) {
+                    JOptionPane.showMessageDialog(null, e1.getMessage());
+                  
+                }
+               
             }
         });
 

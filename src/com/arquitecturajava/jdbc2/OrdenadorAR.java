@@ -82,7 +82,7 @@ public class OrdenadorAR {
             sentencia.setInt(1, getNumero());
             sentencia.setString(2, getModelo());
             sentencia.setDouble(3, getPrecio());
-            sentencia.executeUpdate(sql);
+            sentencia.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             throw e;
@@ -91,7 +91,7 @@ public class OrdenadorAR {
     }
 
     // su propia persistencia
-    public OrdenadorAR insertar() {
+    public OrdenadorAR insertar() throws SQLException {
 
         String sql = "insert into Ordenador (numero,modelo,precio) values (?,?,?)";
 
@@ -102,8 +102,9 @@ public class OrdenadorAR {
             sentencia.setDouble(3, getPrecio());
             sentencia.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("ha ocurrido un error");
+   
             System.out.println(e.getMessage());
+            throw e;
         }
         return this;
     }
