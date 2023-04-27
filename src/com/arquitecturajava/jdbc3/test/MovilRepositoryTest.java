@@ -1,8 +1,10 @@
 package com.arquitecturajava.jdbc3.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,5 +46,12 @@ public class MovilRepositoryTest {
         assertEquals(movil,movilInsertado);
 
 
+    }
+    @Test
+    public void buscarTodosTest() {
+
+        List<Movil> lista = repositorio.buscarTodos();
+
+        assertTrue(lista.size() > 4);
     }
 }

@@ -2,15 +2,19 @@ package com.arquitecturajava.jdbc3.repositories;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.arquitecturajava.jdbc3.config.DataBaseHelper;
 import com.arquitecturajava.jdbc3.dominio.Movil;
+import com.arquitecturajava.jdbc3.dominio.Ordenador;
 
 public class MovilRepositoryMySQL  implements MovilRepository{
 
     private final static String sqlInsertar = "insert into Movil (numero,modelo,contrato) values (?,?,?)";
+    private final static String sqlBuscarTodos = "select * from Movil";
  
 
     @Override
@@ -46,11 +50,29 @@ public class MovilRepositoryMySQL  implements MovilRepository{
         throw new UnsupportedOperationException("Unimplemented method 'borrar'");
     }
 
+    
     @Override
     public List<Movil> buscarTodos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarTodos'");
+
+       
+        List<Movil> lista = new ArrayList<Movil>();
+
+        try (Connection conn = DataBaseHelper.getConexion("mySQL");
+                PreparedStatement stmt = conn.prepareStatement(sqlBuscarTodos);
+                ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+
+                lista.add(new Movil(rs.getInt("numero"), rs.getString("modelo"), rs.getString("contrato")));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("ha ocurrido un error");
+            throw new RuntimeException(e);
+        }
+        return lista;
     }
+
 
     @Override
     public Movil buscarUno(int numero) {
