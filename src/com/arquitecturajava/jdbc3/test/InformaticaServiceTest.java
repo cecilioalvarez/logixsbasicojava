@@ -1,8 +1,14 @@
-package com.arquitecturajava.jdbc3.testintegracion;
+package com.arquitecturajava.jdbc3.test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -25,6 +31,7 @@ public class InformaticaServiceTest {
     private static MovilRepository repositorioMovil;
     private static InformaticaService servicioInformatica;
 
+    /* 
     @BeforeAll
     public static void inicializarGlobal() {
         //instancio un solo objeto para todos
@@ -32,7 +39,8 @@ public class InformaticaServiceTest {
         repositorioMovil= new MovilRepositoryMySQL();
         servicioInformatica= new InformaticaService(repositorioMovil,repositorioOrdenador);
     }
-
+    */
+    /* 
     @BeforeEach
     public void inicializar() throws IOException {
 
@@ -46,13 +54,28 @@ public class InformaticaServiceTest {
         cargador.cargarFichero();
         cargador2.cargarFichero();
     }
+
+    */
     
     @Test
     public void buscarTodosMovilesTest() {
 
-        List<Movil> lista =servicioInformatica.buscarTodosMoviles();
+        
+        MovilRepository repositorioMovilMock=mock(MovilRepository.class);
+        OrdenadorRepository repositorioOrdenadorMock=mock(OrdenadorRepository.class);
 
-        assertTrue(lista.size() > 4);
+        Movil movil1= new Movil(600700800,"iphone","standard");
+        Movil movil2= new Movil(600700800,"iphone","standard");
+        List<Movil> listaMovilMock=Arrays.asList(movil1,movil2);
+        //mock
+        when(repositorioMovilMock.buscarTodos()).thenReturn(listaMovilMock);
+        InformaticaService servicioInformatica= new InformaticaService(repositorioMovilMock,repositorioOrdenadorMock);
+      
+        //act
+        List<Movil> listaMovilResultado =servicioInformatica.buscarTodosMoviles();
+
+        verify(repositorioMovilMock,times(1)).buscarTodos();
+        assertEquals(listaMovilMock,listaMovilResultado);
 
     }
 

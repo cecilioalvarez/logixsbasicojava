@@ -1,4 +1,4 @@
-package com.arquitecturajava.jdbc3.test;
+package com.arquitecturajava.jdbc3.testintegracion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

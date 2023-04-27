@@ -1,4 +1,4 @@
-package com.arquitecturajava.jdbc3.test;
+package com.arquitecturajava.jdbc3.testintegracion;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
