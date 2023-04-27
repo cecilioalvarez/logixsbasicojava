@@ -18,7 +18,7 @@ public class Nota {
 
     public boolean esAprobada() {
 
-        return valor>=8;
+        return valor>=5;
     }
     
 }
