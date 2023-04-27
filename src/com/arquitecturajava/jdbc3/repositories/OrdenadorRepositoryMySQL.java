@@ -15,6 +15,9 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     private final static String sqlActualizar = "update  Ordenador set modelo=?, precio=? where numero=?";
     private final static String sqlInsertar = "insert into Ordenador (numero,modelo,precio) values (?,?,?)";
     private final static String sqlBorrar = "delete from Ordenador where numero=?";
+    private final static String sqlBuscarTodos= "select * from Ordenador";
+    private final static String sqlBuscarBaratos="select * from Ordenador where precio<200";
+   
     @Override
     public Ordenador actualizar(Ordenador ordenador) {
 
@@ -72,10 +75,11 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     @Override
     public List<Ordenador> buscarTodos() {
 
+       
         List<Ordenador> lista = new ArrayList<Ordenador>();
 
         try (Connection conn = DataBaseHelper.getConexion("mySQL");
-                PreparedStatement stmt = conn.prepareStatement("select * from Ordenador");
+                PreparedStatement stmt = conn.prepareStatement(sqlBuscarTodos);
                 ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -93,10 +97,11 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     @Override
     public List<Ordenador> buscarOrdenadoresBaratos() {
 
+       
         List<Ordenador> lista = new ArrayList<Ordenador>();
 
         try (Connection conn = DataBaseHelper.getConexion("mySQL");
-                PreparedStatement stmt = conn.prepareStatement("select * from Ordenador where precio<200");
+                PreparedStatement stmt = conn.prepareStatement(sqlBuscarBaratos);
                 ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
