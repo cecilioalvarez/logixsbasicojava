@@ -1,4 +1,4 @@
-package com.arquitecturajava.jdbc3;
+package com.arquitecturajava.jdbc3.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -11,6 +11,13 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.arquitecturajava.jdbc3.config.CargadorConsultasSQL;
+import com.arquitecturajava.jdbc3.config.DataBaseHelper;
+import com.arquitecturajava.jdbc3.config.LectorFichero;
+import com.arquitecturajava.jdbc3.dominio.Ordenador;
+import com.arquitecturajava.jdbc3.repositories.OrdenadorRepository;
+import com.arquitecturajava.jdbc3.repositories.OrdenadorRepositoryMySQL;
 
 public class OrdenadorRepositoryTest {
 

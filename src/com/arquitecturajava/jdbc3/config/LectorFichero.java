@@ -1,4 +1,4 @@
-package com.arquitecturajava.jdbc3;
+package com.arquitecturajava.jdbc3.config;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

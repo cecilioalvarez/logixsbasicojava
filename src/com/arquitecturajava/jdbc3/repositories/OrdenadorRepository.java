@@ -1,7 +1,9 @@
-package com.arquitecturajava.jdbc3;
+package com.arquitecturajava.jdbc3.repositories;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import com.arquitecturajava.jdbc3.dominio.Ordenador;
 
 public interface OrdenadorRepository {
 

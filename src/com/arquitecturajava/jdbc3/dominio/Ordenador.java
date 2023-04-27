@@ -1,4 +1,4 @@
-package com.arquitecturajava.jdbc3;
+package com.arquitecturajava.jdbc3.dominio;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

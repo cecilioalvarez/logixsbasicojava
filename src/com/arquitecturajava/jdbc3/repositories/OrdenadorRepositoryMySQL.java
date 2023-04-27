@@ -1,4 +1,4 @@
-package com.arquitecturajava.jdbc3;
+package com.arquitecturajava.jdbc3.repositories;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.arquitecturajava.jdbc3.config.DataBaseHelper;
+import com.arquitecturajava.jdbc3.dominio.Ordenador;
 
 public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     
