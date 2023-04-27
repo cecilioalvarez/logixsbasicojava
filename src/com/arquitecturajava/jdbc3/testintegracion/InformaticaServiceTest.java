@@ -1,4 +1,4 @@
-package com.arquitecturajava.jdbc3.test;
+package com.arquitecturajava.jdbc3.testintegracion;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,8 +20,6 @@ import com.arquitecturajava.jdbc3.repositories.OrdenadorRepositoryMySQL;
 import com.arquitecturajava.jdbc3.services.InformaticaService;
 
 public class InformaticaServiceTest {
-    
-
     
     private static OrdenadorRepository repositorioOrdenador;
     private static MovilRepository repositorioMovil;

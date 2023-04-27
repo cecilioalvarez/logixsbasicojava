@@ -70,7 +70,7 @@ public class MovilRepositoryMySQL  implements MovilRepository{
             System.out.println("ha ocurrido un error");
             throw new RuntimeException(e);
         }
-        return lista;
+        return null;
     }
 
 
