@@ -15,7 +15,7 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     private final static String sqlActualizar = "update  Ordenador set modelo=?, precio=? where numero=?";
     private final static String sqlInsertar = "insert into Ordenador (numero,modelo,precio) values (?,?,?)";
     private final static String sqlBorrar = "delete from Ordenador where numero=?";
-    private final static String sqlBuscarTodos= "select * from Ordenador order by Numero";
+    private final static String sqlBuscarTodos= "select * from Ordenador order by modelo";
     private final static String sqlBuscarBaratos="select * from Ordenador where precio<200";
     private final static String sqlBuscarUno= "select * from Ordenador where numero=?";
 
