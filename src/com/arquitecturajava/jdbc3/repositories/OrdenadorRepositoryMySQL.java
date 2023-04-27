@@ -17,7 +17,8 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     private final static String sqlBorrar = "delete from Ordenador where numero=?";
     private final static String sqlBuscarTodos= "select * from Ordenador";
     private final static String sqlBuscarBaratos="select * from Ordenador where precio<200";
-   
+    private final static String sqlBuscarUno= "select * from Ordenador where numero=?";
+
     @Override
     public Ordenador actualizar(Ordenador ordenador) {
 
@@ -119,10 +120,11 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     @Override
     public Ordenador buscarUno(int numero) {
 
+       
         Ordenador ordenador = null;
 
         try (Connection conn = DataBaseHelper.getConexion("mySQL");
-                PreparedStatement stmt = conn.prepareStatement("select * from Ordenador where numero=?");
+                PreparedStatement stmt = conn.prepareStatement(sqlBuscarUno);
 
         ) {
             stmt.setInt(1, numero);
