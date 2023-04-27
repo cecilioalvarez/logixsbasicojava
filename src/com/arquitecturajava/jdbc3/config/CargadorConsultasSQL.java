@@ -13,6 +13,8 @@ public class CargadorConsultasSQL {
         this.dataBaseHelper=dataBaseHelper;
     }
 
+    //lo que hace es verifica que se han insertado las lineas
+    // que se leyeron con el lector en la base de datos
     public int cargarFichero() throws IOException {
 
      List<String> lineas= lector.leerLineas();
