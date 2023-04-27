@@ -11,17 +11,19 @@ import com.arquitecturajava.jdbc3.config.DataBaseHelper;
 import com.arquitecturajava.jdbc3.dominio.Ordenador;
 
 public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
-    
+
+    private final static String sqlActualizar = "update  Ordenador set modelo=?, precio=? where numero=?";
+    private final static String sqlInsertar = "insert into Ordenador (numero,modelo,precio) values (?,?,?)";
+    private final static String sqlBorrar = "delete from Ordenador where numero=?";
     @Override
     public Ordenador actualizar(Ordenador ordenador) {
 
-        String sql = "update  Ordenador set modelo=?, precio=? where numero=?";
-
+     
         try (Connection conexion = DataBaseHelper.getConexion("mySQL");
-                PreparedStatement sentencia = conexion.prepareStatement(sql);) {
+                PreparedStatement sentencia = conexion.prepareStatement(sqlActualizar);) {
 
-            sentencia.setInt(1,ordenador.getNumero());
-            sentencia.setString(2,ordenador.getModelo());
+            sentencia.setInt(1, ordenador.getNumero());
+            sentencia.setString(2, ordenador.getModelo());
             sentencia.setDouble(3, ordenador.getPrecio());
             sentencia.executeUpdate();
         } catch (SQLException e) {
@@ -35,16 +37,16 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     @Override
     public Ordenador insertar(Ordenador ordenador) {
 
-        String sql = "insert into Ordenador (numero,modelo,precio) values (?,?,?)";
+      
 
         try (Connection conexion = DataBaseHelper.getConexion("mySQL");
-                PreparedStatement sentencia = conexion.prepareStatement(sql);) {
-            sentencia.setInt(1,ordenador.getNumero());
+                PreparedStatement sentencia = conexion.prepareStatement(sqlInsertar);) {
+            sentencia.setInt(1, ordenador.getNumero());
             sentencia.setString(2, ordenador.getModelo());
             sentencia.setDouble(3, ordenador.getPrecio());
             sentencia.executeUpdate();
         } catch (SQLException e) {
-   
+
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
@@ -55,11 +57,11 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     @Override
     public void borrar(Ordenador ordenador) {
 
-        String sql = "delete from Ordenador where numero=?";
+      
 
         try (Connection conexion = DataBaseHelper.getConexion("mySQL");
-                PreparedStatement sentencia = conexion.prepareStatement(sql);) {
-            sentencia.setInt(1,ordenador.getNumero());
+                PreparedStatement sentencia = conexion.prepareStatement(sqlBorrar);) {
+            sentencia.setInt(1, ordenador.getNumero());
             sentencia.executeUpdate();
         } catch (SQLException e) {
             System.out.println("ha ocurrido un error");
@@ -68,7 +70,7 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     }
 
     @Override
-    public  List<Ordenador> buscarTodos() {
+    public List<Ordenador> buscarTodos() {
 
         List<Ordenador> lista = new ArrayList<Ordenador>();
 
@@ -89,7 +91,7 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     }
 
     @Override
-    public  List<Ordenador> buscarOrdenadoresBaratos() {
+    public List<Ordenador> buscarOrdenadoresBaratos() {
 
         List<Ordenador> lista = new ArrayList<Ordenador>();
 
@@ -110,7 +112,7 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     }
 
     @Override
-    public  Ordenador buscarUno(int numero) {
+    public Ordenador buscarUno(int numero) {
 
         Ordenador ordenador = null;
 
@@ -120,14 +122,12 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
         ) {
             stmt.setInt(1, numero);
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()!=false)
-                ordenador = new Ordenador(rs.getInt("numero"), rs.getString("modelo"), rs.getDouble("precio"));
+                if (rs.next() != false)
+                    ordenador = new Ordenador(rs.getInt("numero"), rs.getString("modelo"), rs.getDouble("precio"));
 
             }
 
-        } catch (
-
-        SQLException e) {
+        } catch (SQLException e) {
             System.out.println("ha ocurrido un error");
             throw new RuntimeException(e);
         }
@@ -135,7 +135,7 @@ public class OrdenadorRepositoryMySQL implements OrdenadorRepository {
     }
 
     @Override
-    public  List<Ordenador> buscarPorRangoPrecios(double precioInicial, double precioFinal) {
+    public List<Ordenador> buscarPorRangoPrecios(double precioInicial, double precioFinal) {
 
         List<Ordenador> lista = new ArrayList<Ordenador>();
 
