@@ -1,13 +1,28 @@
 package com.arquitecturajava.jdbc3.testbasicos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Alumno {
     
     private String nombre;
-    private Nota nota;
+    private List<Nota> notas= new ArrayList<Nota>();
     
-    public Alumno(String nombre, Nota nota) {
+    public Alumno(String nombre) {
         this.nombre = nombre;
-        this.nota = nota;
+        
+    }
+
+    
+    public Alumno(String nombre, List<Nota> notas) {
+        this.nombre = nombre;
+        this.notas = notas;
+    }
+
+
+    public void addNota(Nota nota) {
+
+        this.notas.add(nota);
     }
 
     public String getNombre() {
@@ -18,17 +33,15 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public Nota getNota() {
-        return nota;
+    public int aprobados() {
+
+        int total=0;
+        for (Nota nota:notas) {
+
+            if (nota.esAprobada()) total++;
+
+        }
+        return total;
     }
 
-    public void setNota(Nota nota) {
-        this.nota = nota;
-    }
-
-    public boolean notaEstaAprobada() {
-        return nota.esAprobada();
-    }
-
-    
 }

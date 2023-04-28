@@ -10,7 +10,7 @@ public class NotaTest {
     @Test
     public void notaAprobada() {
 
-        Nota nota= new Nota(6);
+        Nota nota= new Nota(5);
         assertTrue( nota.esAprobada());
 
     }

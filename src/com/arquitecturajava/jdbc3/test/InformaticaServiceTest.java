@@ -2,6 +2,7 @@ package com.arquitecturajava.jdbc3.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -19,6 +20,7 @@ import com.arquitecturajava.jdbc3.config.CargadorConsultasSQL;
 import com.arquitecturajava.jdbc3.config.DataBaseHelper;
 import com.arquitecturajava.jdbc3.config.LectorFichero;
 import com.arquitecturajava.jdbc3.dominio.Movil;
+import com.arquitecturajava.jdbc3.dominio.Ordenador;
 import com.arquitecturajava.jdbc3.repositories.MovilRepository;
 import com.arquitecturajava.jdbc3.repositories.MovilRepositoryMySQL;
 import com.arquitecturajava.jdbc3.repositories.OrdenadorRepository;
@@ -64,9 +66,11 @@ public class InformaticaServiceTest {
         MovilRepository repositorioMovilMock=mock(MovilRepository.class);
         OrdenadorRepository repositorioOrdenadorMock=mock(OrdenadorRepository.class);
 
+        //crear lista
         Movil movil1= new Movil(600700800,"iphone","standard");
         Movil movil2= new Movil(600700800,"iphone","standard");
         List<Movil> listaMovilMock=Arrays.asList(movil1,movil2);
+
         //mock
         when(repositorioMovilMock.buscarTodos()).thenReturn(listaMovilMock);
         InformaticaService servicioInformatica= new InformaticaService(repositorioMovilMock,repositorioOrdenadorMock);
@@ -76,6 +80,24 @@ public class InformaticaServiceTest {
 
         verify(repositorioMovilMock,times(1)).buscarTodos();
         assertEquals(listaMovilMock,listaMovilResultado);
+
+    }
+
+    @Test
+    public void borrarOrdenadorTest() {
+
+        //arrange
+        MovilRepository repositorioMovilMock=mock(MovilRepository.class);
+        OrdenadorRepository repositorioOrdenadorMock=mock(OrdenadorRepository.class);
+        InformaticaService servicioInformatica= new InformaticaService(repositorioMovilMock,repositorioOrdenadorMock);
+        Ordenador ordenador= new Ordenador(1);
+
+        //act
+        servicioInformatica.borrarOrdenador(ordenador);
+
+        //assertions //esto muy bien porque 
+        verify(repositorioOrdenadorMock,times(1)).borrar(ordenador);
+       
 
     }
 
