@@ -64,7 +64,6 @@ public class InformaticaServiceTest {
         Ordenador o3 = new Ordenador(1);
         List<Ordenador> lista = List.of(o1,o2,o3);
         
-   
         servicioInformatica.borrarOrdenadores(lista);
 
         verify(repositorioOrdenadorMock, times(3)).borrar(any(Ordenador.class));
