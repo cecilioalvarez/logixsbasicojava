@@ -57,6 +57,16 @@ public class InformaticaService {
         return repositorioOrdenador.insertar(ordenador);
     }
 
+    public List<Ordenador> insertarOrdenadores(List<Ordenador> ordenadores) {
+
+        for (Ordenador ordenador: ordenadores) {
+         ordenador.addRecargo();
+         repositorioOrdenador.insertar(ordenador);
+        }
+        return ordenadores;
+    }
+
+
     public void borrarOrdenador(Ordenador ordenador) {
         repositorioOrdenador.borrar(ordenador);
     }

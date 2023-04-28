@@ -2,6 +2,7 @@ package com.arquitecturajava.jdbc3.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -67,6 +68,33 @@ public class InformaticaServiceTest {
         servicioInformatica.borrarOrdenadores(lista);
 
         verify(repositorioOrdenadorMock, times(3)).borrar(any(Ordenador.class));
+        
+    }
+
+    @Test
+    public void insertarOrdenadoresTest() {
+
+        Ordenador o1 = mock(Ordenador.class);
+        Ordenador o2 = mock(Ordenador.class);
+        Ordenador o3 =  mock(Ordenador.class);
+
+        when(o1.getPrecio()).thenReturn(100.0);
+        when(o2.getPrecio()).thenReturn(100.0);
+        when(o3.getPrecio()).thenReturn(100.0);
+        
+      
+    
+        servicioInformatica.insertarOrdenadores(List.of(o1,o2,o3));
+
+        verify(o1, times(1)).addRecargo();
+        verify(o2, times(1)).addRecargo();
+        verify(o3, times(1)).addRecargo();
+        verify(repositorioOrdenadorMock, times(3)).insertar(any(Ordenador.class));
+       
+        assertEquals (100,o1.getPrecio(),0);
+        assertEquals (100,o2.getPrecio(),0);
+        assertEquals (100,o3.getPrecio(),0);
+
         
     }
 }

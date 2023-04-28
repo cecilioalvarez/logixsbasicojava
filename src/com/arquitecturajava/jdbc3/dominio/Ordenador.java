@@ -72,5 +72,9 @@ public class Ordenador {
         return true;
     }
 
+    public void addRecargo(){
+
+        this.precio=precio+101;
+    }
    
 }
