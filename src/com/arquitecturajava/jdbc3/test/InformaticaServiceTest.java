@@ -1,6 +1,7 @@
 package com.arquitecturajava.jdbc3.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -75,17 +76,18 @@ public class InformaticaServiceTest {
     public void insertarOrdenadoresTest() {
 
         Ordenador ordenador = mock(Ordenador.class);
-        when(ordenador.getPrecio()).thenReturn(100.0);
+        // when(ordenador.getPrecio()).thenReturn(100.0);
 
-        List<Ordenador> listaOrdenadoresInsertados=servicioInformatica.insertarOrdenadores(List.of(ordenador, ordenador, ordenador));
-        Ordenador ordenadorInsertado=listaOrdenadoresInsertados.get(0);
+        List<Ordenador> ordenadores=List.of(ordenador, ordenador, ordenador);
+        List<Ordenador> listaOrdenadoresInsertados = servicioInformatica
+                .insertarOrdenadores(ordenadores);
+
+       
 
         verify(ordenador, times(3)).addRecargo();
         verify(repositorioOrdenadorMock, times(3)).insertar(any(Ordenador.class));
 
-        assertEquals(ordenadorInsertado.getPrecio(),ordenador.getPrecio());
-        
-
+        assertIterableEquals(ordenadores, listaOrdenadoresInsertados);
 
     }
 }
