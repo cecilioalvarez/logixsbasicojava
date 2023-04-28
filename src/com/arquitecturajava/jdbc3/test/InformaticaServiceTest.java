@@ -63,38 +63,29 @@ public class InformaticaServiceTest {
         Ordenador o1 = new Ordenador(1);
         Ordenador o2 = new Ordenador(1);
         Ordenador o3 = new Ordenador(1);
-        List<Ordenador> lista = List.of(o1,o2,o3);
-        
+        List<Ordenador> lista = List.of(o1, o2, o3);
+
         servicioInformatica.borrarOrdenadores(lista);
 
         verify(repositorioOrdenadorMock, times(3)).borrar(any(Ordenador.class));
-        
+
     }
 
     @Test
     public void insertarOrdenadoresTest() {
 
-        Ordenador o1 = mock(Ordenador.class);
-        Ordenador o2 = mock(Ordenador.class);
-        Ordenador o3 =  mock(Ordenador.class);
+        Ordenador ordenador = mock(Ordenador.class);
+        when(ordenador.getPrecio()).thenReturn(100.0);
 
-        when(o1.getPrecio()).thenReturn(100.0);
-        when(o2.getPrecio()).thenReturn(100.0);
-        when(o3.getPrecio()).thenReturn(100.0);
-        
-      
-    
-        servicioInformatica.insertarOrdenadores(List.of(o1,o2,o3));
+        List<Ordenador> listaOrdenadoresInsertados=servicioInformatica.insertarOrdenadores(List.of(ordenador, ordenador, ordenador));
+        Ordenador ordenadorInsertado=listaOrdenadoresInsertados.get(0);
 
-        verify(o1, times(1)).addRecargo();
-        verify(o2, times(1)).addRecargo();
-        verify(o3, times(1)).addRecargo();
+        verify(ordenador, times(3)).addRecargo();
         verify(repositorioOrdenadorMock, times(3)).insertar(any(Ordenador.class));
-       
-        assertEquals (100,o1.getPrecio(),0);
-        assertEquals (100,o2.getPrecio(),0);
-        assertEquals (100,o3.getPrecio(),0);
 
+        assertEquals(ordenadorInsertado.getPrecio(),ordenador.getPrecio());
         
+
+
     }
 }
