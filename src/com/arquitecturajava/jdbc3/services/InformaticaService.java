@@ -29,6 +29,13 @@ public class InformaticaService {
         repositorioMovil.borrar(movil);
     }
 
+    public void borrarMoviles(List<Movil> moviles) {
+        for (Movil movil:moviles) {
+            repositorioMovil.borrar(movil);
+        }
+        
+    }
+
     public List<Movil> buscarTodosMoviles() {
         List<Movil> lista= repositorioMovil.buscarTodos();
         for (Movil m:lista) {
@@ -52,6 +59,14 @@ public class InformaticaService {
 
     public void borrarOrdenador(Ordenador ordenador) {
         repositorioOrdenador.borrar(ordenador);
+    }
+
+    public void borrarOrdenadores(List<Ordenador> lista) {
+        for (Ordenador o: lista) {
+
+            repositorioOrdenador.borrar(o);
+        }
+       
     }
 
     public List<Ordenador> buscarTodosOrdenadores() {
